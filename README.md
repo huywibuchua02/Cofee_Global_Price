@@ -1,8 +1,6 @@
 ---
 # Truy xuất dữ liệu chuyến bay bằng OpenSky Network API
 
-![OpenSky Network]((https://openskynetwork.github.io/opensky-api/))
-
 ## Yêu cầu/chức năng của dự án:
 
 - Tạo ứng dụng để truy xuất dữ liệu chuyến bay từ OpenSky Network API.
