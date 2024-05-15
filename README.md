@@ -1,7 +1,7 @@
 ---
 # Truy xuất dữ liệu chuyến bay bằng OpenSky Network API
 
-![OpenSky Network](https://opensky-network.org/images/logo_opensky.png)
+![OpenSky Network]([https://opensky-network.org/images/logo_opensky.png](https://openskynetwork.github.io/opensky-api/_static/radar_small.png))
 
 ## Yêu cầu/chức năng của dự án:
 
