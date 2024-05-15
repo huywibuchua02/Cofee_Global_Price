@@ -1,6 +1,6 @@
 ---
-Họ và tên: Trần Quang Huy
-Mssv: K205480106055
+Họ và tên - Trần Quang Huy
+Mssv - K205480106055
 # Truy xuất dữ liệu chuyến bay bằng OpenSky Network API
 
 https://openskynetwork.github.io/opensky-api/
