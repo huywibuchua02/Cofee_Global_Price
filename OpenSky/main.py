@@ -1,102 +1,33 @@
-from fastapi import FastAPI
+﻿from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import requests
 import pyodbc
-import json
 
 app = FastAPI()
 
-# Database connection string
-connection_string = "Driver={ODBC Driver 17 for SQL Server};Server=127.0.0.1\SQLEXPRESS;Database=flightdata;UID=sa;PWD=123;"
+# Kết nối đến cơ sở dữ liệu MSSQL
+conn = pyodbc.connect('DRIVER={SQL Server};SERVER=127.0.0.1\SQLEXPRESS;DATABASE=IPSTACK;UID=sa;PWD=123')
+cursor = conn.cursor()
 
-class FlightData(BaseModel):
-    icao24: str
-    callsign: str
-    origin_country: str
-    time_position: int
-    last_contact: int
-    longitude: float
-    latitude: float
-    baro_altitude: float
-    on_ground: bool
-    velocity: float
-    true_track: float
-    vertical_rate: float
-    sensors: str
-    geo_altitude: float
-    squawk: str
-    spi: bool
-    position_source: int
+class Location(BaseModel):
+    ip_address: str
 
-def insert_flight_data(flight):
-    conn = pyodbc.connect(connection_string)
-    cursor = conn.cursor()
-    cursor.execute("""
-        EXEC SP_InsertFlightData ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
-    """, (
-        flight["icao24"],
-        flight["callsign"],
-        flight["origin_country"],
-        flight["time_position"],
-        flight["last_contact"],
-        flight["longitude"],
-        flight["latitude"],
-        flight["baro_altitude"],
-        flight["on_ground"],
-        flight["velocity"],
-        flight["true_track"],
-        flight["vertical_rate"],
-        flight["sensors"],
-        flight["geo_altitude"],
-        flight["squawk"],
-        flight["spi"],
-        flight["position_source"]
-    ))
-    conn.commit()
-    cursor.close()
-    conn.close()
-
-@app.get("/fetch_flights")
-def fetch_flights():
-    url = "https://opensky-network.org/api/states/all"
+@app.post("/get_location/")
+async def get_location(location: Location):
+    # Lấy thông tin từ ipstack
+    api_key = '256b7419297060449c6ea234d054a5f6'
+    url = f'http://api.ipstack.com/{location.ip_address}?access_key={api_key}'
     response = requests.get(url)
-    data = response.json()
-
-    flights = []
-    for state in data['states']:
-        flight = {
-            "icao24": state[0],
-            "callsign": state[1],
-            "origin_country": state[2],
-            "time_position": state[3],
-            "last_contact": state[4],
-            "longitude": state[5],
-            "latitude": state[6],
-            "baro_altitude": state[7],
-            "on_ground": state[8],
-            "velocity": state[9],
-            "true_track": state[10],
-            "vertical_rate": state[11],
-            "sensors": json.dumps(state[12]) if state[12] else None,
-            "geo_altitude": state[13],
-            "squawk": state[14],
-            "spi": state[15],
-            "position_source": state[16]
-        }
-        flights.append(flight)
-        insert_flight_data(flight)
-
-    return {"status": "success", "data": flights}
-
-@app.get("/get_flights")
-def get_flights():
-    conn = pyodbc.connect(connection_string)
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM Flights")
-    columns = [column[0] for column in cursor.description]
-    results = []
-    for row in cursor.fetchall():
-        results.append(dict(zip(columns, row)))
-    cursor.close()
-    conn.close()
-    return results
+    
+    if response.status_code == 200:
+        data = response.json()
+        # Lưu thông tin vào cơ sở dữ liệu
+        cursor.execute("EXEC AddLocationData ?, ?, ?, ?, ?, ?, ?, ?", 
+                       (data['ip'], data['country_code'], data['country_name'], data['region_name'],
+                        data['city'], data['zip'], data['latitude'], data['longitude']))
+        conn.commit()
+        
+        # Trả về thông tin vị trí dưới dạng JSON
+        return data
+    else:
+        raise HTTPException(status_code=404, detail="Không tìm thấy thông tin vị trí")

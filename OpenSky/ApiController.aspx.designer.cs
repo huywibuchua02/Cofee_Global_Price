@@ -11,7 +11,7 @@ namespace OpenSky
 {
 
 
-    public partial class FlightData
+    public partial class ApiController
     {
     }
 }

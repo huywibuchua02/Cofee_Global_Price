@@ -1,1 +1,0 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FlightData.aspx.cs" Inherits="OpenSky.FlightData" %>

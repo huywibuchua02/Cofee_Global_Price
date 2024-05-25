@@ -53,6 +53,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.1.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -61,21 +68,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FlightData.aspx" />
-    <Content Include="FlightData.html" />
+    <Content Include="ApiController.aspx" />
+    <Content Include="index.html" />
     <Content Include="main.py" />
-    <Content Include="requirements.txt" />
-    <Content Include="scripts.js" />
+    <Content Include="script.js" />
     <Content Include="styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FlightData.aspx.cs">
-      <DependentUpon>FlightData.aspx</DependentUpon>
+    <Compile Include="ApiController.aspx.cs">
+      <DependentUpon>ApiController.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FlightData.aspx.designer.cs">
-      <DependentUpon>FlightData.aspx</DependentUpon>
+    <Compile Include="ApiController.aspx.designer.cs">
+      <DependentUpon>ApiController.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
