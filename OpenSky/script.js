@@ -1,53 +1,26 @@
-﻿$(document).ready(function () {
-    // Lấy thông tin vị trí từ FastAPI thông qua biến locationData
-    var locationData = locationData;
+﻿document.addEventListener('DOMContentLoaded', function () {
+    // Lấy dữ liệu từ API và điền vào các thẻ HTML
+    fetch('/api/location/getlocation?ipAddress=117.5.147.158')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch location data');
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('ipAddress').innerText = data.ip;
+            document.getElementById('countryCode').innerText = data.country_code;
+            document.getElementById('countryName').innerText = data.country_name;
+            document.getElementById('regionName').innerText = data.region_name;
+            document.getElementById('city').innerText = data.city;
+            document.getElementById('zip').innerText = data.zip;
+            document.getElementById('latitude').innerText = data.latitude;
+            document.getElementById('longitude').innerText = data.longitude;
+        })
+        .catch(error => console.error('Error fetching location data:', error));
 
-    // Hiển thị thông tin vị trí từ dữ liệu JSON
-    $('#ipAddress').text(locationData.ip);
-    $('#countryCode').text(locationData.country_code);
-    $('#countryName').text(locationData.country_name);
-    $('#regionName').text(locationData.region_name);
-    $('#city').text(locationData.city);
-    $('#zip').text(locationData.zip);
-    $('#latitude').text(locationData.latitude);
-    $('#longitude').text(locationData.longitude);
-
-    // Chức năng tạo file Excel từ dữ liệu vị trí
-    $('#exportExcelBtn').click(function () {
-        // Tạo một mảng chứa dữ liệu vị trí
-        var locationArray = [
-            ['IP Address', locationData.ip],
-            ['Country Code', locationData.country_code],
-            ['Country Name', locationData.country_name],
-            ['Region Name', locationData.region_name],
-            ['City', locationData.city],
-            ['Zip', locationData.zip],
-            ['Latitude', locationData.latitude],
-            ['Longitude', locationData.longitude]
-        ];
-
-        // Tạo workbook và worksheet
-        var workbook = new ExcelJS.Workbook();
-        var worksheet = workbook.addWorksheet('Location Information');
-
-        // Thêm dữ liệu từ mảng vào worksheet
-        locationArray.forEach(function (row) {
-            worksheet.addRow(row);
-        });
-
-        // Tạo tệp Excel và tải xuống
-        workbook.xlsx.writeBuffer().then(function (buffer) {
-            var blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-            var url = URL.createObjectURL(blob);
-
-            // Tạo một thẻ 'a' để tải xuống tệp Excel
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = 'location_information.xlsx';
-            a.click();
-
-            // Giải phóng URL
-            URL.revokeObjectURL(url);
-        });
+    // Xử lý sự kiện cho nút "Xuất Excel" nếu cần
+    document.getElementById('exportExcelBtn').addEventListener('click', function () {
+        // Viết logic xử lý tại đây
     });
 });
