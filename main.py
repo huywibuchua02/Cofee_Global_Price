@@ -1,35 +1,24 @@
-﻿from fastapi import FastAPI
+﻿from fastapi import FastAPI, HTTPException, Header
 import requests
 
-# Tạo một ứng dụng FastAPI
 app = FastAPI()
 
-# Định nghĩa tuyến đường cho ứng dụng
 @app.get("/")
-async def get_ip_info():
-    # Sử dụng API key mà bạn đã lấy được
-    api_key = '50b2f28a27b9b0718953bd387dd219fb'
-    
-    # Địa chỉ IP cần lấy thông tin
-    ip_address = '117.5.147.158'
-    
-    # URL của API ipstack
-    url = f'http://api.ipstack.com/{ip_address}?access_key={api_key}'
-    
-    # Gửi yêu cầu đến API
-    response = requests.get(url)
-    
-    # Kiểm tra xem yêu cầu có thành công không
-    if response.status_code == 200:
-        # Chuyển đổi dữ liệu JSON thành dictionary
-        data = response.json()
-        
-        # Trả về dữ liệu dưới dạng JSON
-        return data
-    else:
-        # Nếu yêu cầu không thành công, trả về một thông báo lỗi
-        return {"error": "Failed to fetch IP information"}
+def home():
+    return "Trang chủ api vào /data"
 
-# Chạy ứng dụng với Uvicorn
-# Định nghĩa mô-đun "main" trong tệp này, chạy:
-# uvicorn main:app --reload
+@app.get("/data")
+async def get_coffee_data(api_key: str = Header(None)):
+    api_key = "BGPYNSBKZV6CQDHD"
+    if api_key is None:
+        raise HTTPException(status_code=400, detail="API key is required")
+    # https://www.alphavantage.co/query?function=COFFEE&interval=monthly&apikey=BGPYNSBKZV6CQDHD
+    url = f'https://www.alphavantage.co/query?function=COFFEE&interval=monthly&apikey={api_key}'
+    response  = requests.get(url)
+    if response .status_code != 200:
+        raise HTTPException(status_code=500, detail="Failed to fetch data from Alpha Vantage")
+    
+    # Đổi từ JSON thành một đối tượng Python
+    data = response .json()
+    
+    return data

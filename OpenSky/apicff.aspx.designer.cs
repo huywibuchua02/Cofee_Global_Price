@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OpenSky
+namespace Cofee
 {
 
 
-    public partial class ApiController
+    public partial class apicff
     {
     }
 }

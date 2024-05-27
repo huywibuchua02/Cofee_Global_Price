@@ -3,41 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiểm tra dữ liệu qua IP</title>
+    <title>Global Price of Coffee</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Liên kết với tệp CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link href="styles.css" rel="stylesheet" />
     <!-- Script JavaScript -->
     <script src="script.js"></script>
+
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+
 </head>
 <body>
-    <h1>Location Information</h1>
-    <div>
-        <strong>IP Address:</strong> <span id="ipAddress"></span>
-    </div>
-    <div>
-        <strong>Country Code:</strong> <span id="countryCode"></span>
-    </div>
-    <div>
-        <strong>Country Name:</strong> <span id="countryName"></span>
-    </div>
-    <div>
-        <strong>Region Name:</strong> <span id="regionName"></span>
-    </div>
-    <div>
-        <strong>City:</strong> <span id="city"></span>
-    </div>
-    <div>
-        <strong>Zip:</strong> <span id="zip"></span>
-    </div>
-    <div>
-        <strong>Latitude:</strong> <span id="latitude"></span>
-    </div>
-    <div>
-        <strong>Longitude:</strong> <span id="longitude"></span>
-    </div>
+    <h1>Global Price of Coffee(monthly) </h1>
+    <h2>Unit: cents per pound</h2>
+    <h2 id="now"></h2>
+    <div id="kq"></div>
 
-    <!-- Nút "Xuất Excel" -->
-    <button id="exportExcelBtn">Xuất Excel</button>
+    <canvas id="myChart"></canvas>
 
 
 </body>

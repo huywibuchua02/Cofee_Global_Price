@@ -61,19 +61,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApiController.aspx" />
+    <Content Include="apicff.aspx" />
     <Content Include="index.html" />
     <Content Include="script.js" />
     <Content Include="styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiController.aspx.cs">
-      <DependentUpon>ApiController.aspx</DependentUpon>
+    <Compile Include="apicff.aspx.cs">
+      <DependentUpon>apicff.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ApiController.aspx.designer.cs">
-      <DependentUpon>ApiController.aspx</DependentUpon>
+    <Compile Include="apicff.aspx.designer.cs">
+      <DependentUpon>apicff.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,27 +2,14 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 h1 {
-    margin-bottom: 20px;
-}
-
-div {
+    margin: 0;
     margin-bottom: 10px;
+    background-color:aqua;
+    text-align :center;
+    padding:10px;
 }
-
-/* Định dạng nút "Xuất Excel" */
-#exportExcelBtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-    #exportExcelBtn:hover {
-        background-color: #45a049;
-    }
