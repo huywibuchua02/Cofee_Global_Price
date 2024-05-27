@@ -1,16 +1,16 @@
 ---
 Họ và tên - Trần Quang Huy - Mssv - K205480106055
-# Truy xuất dữ liệu chuyến bay bằng OpenSky Network API
+# Theo dõi dữ liệu giá Coffee toàn cầu
 
-https://openskynetwork.github.io/opensky-api/
+https://www.alphavantage.co/documentation/#coffee
 
 ## Yêu cầu/chức năng của dự án:
 
-- Tạo ứng dụng để truy xuất dữ liệu chuyến bay từ OpenSky Network API.
-- Lưu trữ dữ liệu chuyến bay vào cơ sở dữ liệu MSSQL hoặc MySQL.
-- Xây dựng một API bằng Python và FastAPI để truy xuất dữ liệu chuyến bay và cung cấp cho các ứng dụng khác.
+- Tạo ứng dụng để truy xuất dữ liệu giá Coffee toàn cầu.
+- Lưu trữ dữ liệu chuyến bay vào cơ sở dữ liệu MSSQL.
+- Xây dựng một API bằng Python và FastAPI để truy xuất dữ liệu giá Coffee toàn cầu và cung cấp cho các ứng dụng khác.
 - Tự động gọi API Python từ Node-RED để lấy dữ liệu và lưu vào cơ sở dữ liệu.
-- Triển khai một trang web để hiển thị dữ liệu chuyến bay từ cơ sở dữ liệu.
+- Triển khai một trang web để hiển thị dữ liệu giá Coffee toàn cầu từ cơ sở dữ liệu.
 
 
 ## Chi tiết từng phần:
@@ -23,9 +23,9 @@ https://openskynetwork.github.io/opensky-api/
 ### 2. Module đọc dữ liệu:
 
 - Sử dụng Python và FastAPI để tạo API.
-- Lấy dữ liệu từ OpenSky Network API thông qua yêu cầu HTTP.
+- Lấy dữ liệu từ giá Coffee toàn cầu thông qua yêu cầu HTTP.
 - **Thuật toán**:
-  - Gọi API của OpenSky Network để lấy thông tin về các chuyến bay.
+  - Gọi API của Alphavantage để lấy thông tin về giá Coffee toàn cầu.
   - Xử lý và lưu thông tin vào cơ sở dữ liệu.
 
 ### 3. Node-RED:
