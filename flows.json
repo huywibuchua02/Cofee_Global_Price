@@ -1,0 +1,195 @@
+[
+    {
+        "id": "fe9f14e3b34a1ebb",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e59d3b4e54d0feb0",
+        "type": "http request",
+        "z": "fe9f14e3b34a1ebb",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:8000/data",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "34f1816ae780cca1",
+                "6cfff9dfc998b58d"
+            ]
+        ]
+    },
+    {
+        "id": "15f7949f747537b3",
+        "type": "inject",
+        "z": "fe9f14e3b34a1ebb",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "e59d3b4e54d0feb0"
+            ]
+        ]
+    },
+    {
+        "id": "34f1816ae780cca1",
+        "type": "function",
+        "z": "fe9f14e3b34a1ebb",
+        "name": "msg.dataInsert",
+        "func": "// var json = JSON.parse(msg.payload);\n\nfor (let i = 0; i < msg.payload.data.length; i++) {\n    msg.payload.data[i].value = parseFloat(msg.payload.data[i].value);\n}\nmsg.dataInsert = JSON.stringify(msg.payload.data);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 220,
+        "wires": [
+            [
+                "cf8094a7acecd905",
+                "855c8c8669d1d234"
+            ]
+        ]
+    },
+    {
+        "id": "cf8094a7acecd905",
+        "type": "debug",
+        "z": "fe9f14e3b34a1ebb",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "6cfff9dfc998b58d",
+        "type": "debug",
+        "z": "fe9f14e3b34a1ebb",
+        "name": "debug 12",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "7ec9e27fb59c79a6",
+        "type": "debug",
+        "z": "fe9f14e3b34a1ebb",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "855c8c8669d1d234",
+        "type": "MSSQL",
+        "z": "fe9f14e3b34a1ebb",
+        "mssqlCN": "831aadb41d813027",
+        "name": "",
+        "outField": "payload",
+        "returnType": 0,
+        "throwErrors": 1,
+        "query": "InsertCoffeePrices",
+        "modeOpt": "",
+        "modeOptType": "execute",
+        "queryOpt": "payload",
+        "queryOptType": "editor",
+        "paramsOpt": "",
+        "paramsOptType": "editor",
+        "rows": "rows",
+        "rowsType": "msg",
+        "parseMustache": true,
+        "params": [
+            {
+                "output": false,
+                "name": "json",
+                "type": "NVarChar(max)",
+                "valueType": "msg",
+                "value": "dataInsert",
+                "options": {
+                    "nullable": true,
+                    "primary": false,
+                    "identity": false,
+                    "readOnly": false
+                }
+            }
+        ],
+        "x": 780,
+        "y": 220,
+        "wires": [
+            [
+                "7ec9e27fb59c79a6"
+            ]
+        ]
+    },
+    {
+        "id": "831aadb41d813027",
+        "type": "MSSQL-CN",
+        "tdsVersion": "7_4",
+        "name": "",
+        "server": "127.0.0.1\\SQLEXPRESS",
+        "port": "1433",
+        "encyption": true,
+        "trustServerCertificate": true,
+        "database": "IPSTACK",
+        "useUTC": true,
+        "connectTimeout": "15000",
+        "requestTimeout": "15000",
+        "cancelTimeout": "5000",
+        "pool": "5",
+        "parseJSON": false,
+        "enableArithAbort": true,
+        "readOnlyIntent": false
+    }
+]
