@@ -7,7 +7,7 @@ https://www.alphavantage.co/documentation/#coffee
 ## Yêu cầu/chức năng của dự án:
 
 - Tạo ứng dụng để truy xuất dữ liệu giá Coffee toàn cầu.
-- Lưu trữ dữ liệu chuyến bay vào cơ sở dữ liệu MSSQL.
+- Lưu trữ dữ liệu giá coffee vào cơ sở dữ liệu MSSQL.
 - Xây dựng một API bằng Python và FastAPI để truy xuất dữ liệu giá Coffee toàn cầu và cung cấp cho các ứng dụng khác.
 - Tự động gọi API Python từ Node-RED để lấy dữ liệu và lưu vào cơ sở dữ liệu.
 - Triển khai một trang web để hiển thị dữ liệu giá Coffee toàn cầu từ cơ sở dữ liệu.
